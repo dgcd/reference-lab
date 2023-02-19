@@ -1,0 +1,230 @@
+shortName: reference
+
+
+##############
+# deployment #
+##############
+
+selectorLabels:
+  app: reference
+
+replicaCount: 1
+autoscaling:
+  enabled: false
+
+revisionHistoryLimit: 1
+
+podAnnotations:
+  co.elastic.logs/enabled: 'true'
+  co.elastic.logs/multiline.match: 'after'
+  co.elastic.logs/multiline.negate: 'true'
+  co.elastic.logs/multiline.pattern: '^202\d\-\d\d\-\d\d\s\d'
+
+image:
+  pullPolicy: IfNotPresent
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 4242
+  runAsGroup: 4242
+  fsGroup: 4242
+
+securityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+
+containerPort: 8080
+
+envFrom:
+  - secretRef:
+      name: reference-secret
+
+env:
+  - name: TZ
+    value: Europe/Moscow
+
+resources:
+  requests:
+    memory:
+      dev: 499Mi
+      test: 499Mi
+      prod: 499Mi
+    cpu:
+      dev: 499m
+      test: 499m
+      prod: 499m
+  limits:
+    memory:
+      dev: 499Mi
+      test: 499Mi
+      prod: 499Mi
+    cpu:
+      dev: 499m
+      test: 499m
+      prod: 499m
+
+startupProbeEnabled: true
+startupProbe:
+  httpGet:
+    path: /actuator/info
+    port: 8080
+  initialDelaySeconds: 20
+  periodSeconds: 3
+  failureThreshold: 30
+
+readinessProbeEnabled: true
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 3
+  failureThreshold: 30
+
+livenessProbeEnabled: true
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+
+
+###########
+# service #
+###########
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+
+###########
+# ingress #
+###########
+
+ingress:
+  ingressName: ingress
+  hostAlias:
+    dev: dev.lab.example.com
+    test: test.lab.example.com
+    prod: prod.lab.example.com
+
+
+##############
+# config map #
+##############
+
+configMapPath: "/home/starter/application.properties"
+configMapSubpath: "application.properties"
+configMapName: spring-properties
+configmap:
+  spring.application.name: "reference-app"
+
+  spring.config.import: "optional:configserver:http://reference-config-service.reference-config.svc.cluster.local:8080"
+  spring.cloud.config.username: "${CONFIG_USERNAME}"
+  spring.cloud.config.password: "${CONFIG_PASSWORD}"
+
+  spring.profiles.active: "${GLOBAL_ENVIRONMENT}"
+  spring.profiles.include:
+    dev: "catfact,k8s"
+    test: "k8s"
+    prod: "catfact,k8s"
+
+  server.shutdown: "graceful"
+  server.tomcat.threads.max: "2"
+  spring.lifecycle.timeout-per-shutdown-phase: "5s"
+  spring.mvc.servlet.load-on-startup: "1"
+
+  spring.datasource.url:
+    dev: "jdbc:postgresql://192.168.88.41:5432/reference_dev"
+    test: "jdbc:postgresql://192.168.88.41:5432/reference_test"
+    prod: "jdbc:postgresql://192.168.88.41:5432/reference_prod"
+  spring.datasource.username: "${DB_USERNAME}"
+  spring.datasource.password: "${DB_PASSWORD}"
+  spring.datasource.hikari.maximum-pool-size: "2"
+
+  spring.jpa.open-in-view: "false"
+  spring.jpa.hibernate.ddl-auto: "validate"
+  spring.jpa.properties.hibernate.default_schema: "main"
+
+  spring.flyway.default-schema: "${spring.jpa.properties.hibernate.default_schema}"
+  spring.flyway.schemas: "${spring.jpa.properties.hibernate.default_schema}"
+  spring.flyway.url: "${spring.datasource.url}"
+  spring.flyway.user: "${DB_USERNAME}"
+  spring.flyway.password: "${DB_PASSWORD}"
+
+  management.endpoints.web.exposure.include:
+    dev: "*"
+    test: "health,info,metrics,prometheus,loggers"
+    prod: "health,info,metrics,prometheus,loggers"
+  management.endpoint.health.show-components:
+    dev: "always"
+    test: "always"
+    prod: "never"
+  management.endpoint.health.show-details:
+    dev: "always"
+    test: "always"
+    prod: "never"
+  management.endpoint.health.probes.enabled: "true"
+  management.endpoint.health.group.liveness.include: "db,ping"
+  management.health.diskspace.enabled: "true"
+  management.health.kubernetes.enabled: "true"
+  spring.cloud.discovery.client.composite-indicator.enabled: "false"
+
+  management.metrics.export.prometheus.enabled: "true"
+  management.metrics.distribution.percentiles-histogram.http.server.requests: "true"
+  management.metrics.distribution.sla.http.server.requests: "1ms,5ms"
+
+
+  logging.level.dgcd.studies.reference.app.controller: "INFO"
+  #  logging.level.dgcd.studies.reference.app.config.actuator.refresh=INFO
+
+
+  app-refresh.initial-delay: "7000"
+  app-refresh.fixed-delay: "7000"
+
+  app.static-property:
+    dev: "Static value for dev"
+    test: "Static value for test"
+    prod: "Static value for prod"
+  app.static-env-property:
+    dev: "Env value for dev"
+    test: "Env value for test"
+    prod: "Env value for prod"
+
+  refresh.property1: "default 1 from config map (volume)"
+  refresh.property2: "default 2 from config map (volume)"
+  refresh.property3: "default 3 from config map (volume)"
+  refresh.property4: "default 4 from config map (volume)"
+
+
+##################
+# network policy #
+##################
+
+networkPolicy:
+  databasePort: 5432
+  databaseProto: TCP
+  database:
+    dev:
+      - 192.168.88.41/32
+    test:
+      - 192.168.88.41/32
+    prod:
+      - 192.168.88.41/32
+
+  configServerPort: 8888
+  configServerProto: TCP
+  configServer:
+    dev:
+      - 192.168.88.41/32
+    test:
+      - 192.168.88.41/32
+    prod:
+      - 192.168.88.41/32
+

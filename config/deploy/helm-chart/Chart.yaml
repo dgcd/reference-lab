@@ -1,0 +1,6 @@
+apiVersion: v2
+name: reference-config
+description: Spring Cloud Config Server Reference Project Chart
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

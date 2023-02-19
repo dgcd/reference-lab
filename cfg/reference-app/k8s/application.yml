@@ -1,0 +1,4 @@
+refresh:
+  property3: from k8s profile
+
+logging.level.dgcd.studies.reference.app.refresh: "DEBUG"

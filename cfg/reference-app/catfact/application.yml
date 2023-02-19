@@ -1,0 +1,4 @@
+app.catfact.enabled: true
+app.catfact.url: https://catfact.ninja/fact
+
+logging.level.dgcd.studies.reference.app.catfact: "DEBUG"

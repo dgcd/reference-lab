@@ -1,0 +1,81 @@
+version: '3.7'
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    container_name: gitlab
+    hostname: 'gitlab.example.com'
+    restart: unless-stopped
+    ports:
+      - '443:443'
+      - '80:80'
+      - '2222:22'
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+    networks:
+      gitlab_net:
+        aliases:
+          - gitlab
+
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: '/var/lib/postgresql/data/pgdata'
+    volumes:
+      - './postgres:/var/lib/postgresql/data'
+    networks:
+      gitlab_net:
+        aliases:
+          - postgres
+
+
+#  nexus:
+#    image: sonatype/nexus3
+#    container_name: nexus
+#    restart: unless-stopped
+#    ports:
+#      - '8081:8081'
+#      - '4000-4099:4000-4099'
+#    volumes:
+#      # mkdir nexus-data && chown -R 200 nexus-data
+#      - './nexus-data:/nexus-data'
+#    networks:
+#      gitlab_net:
+#        aliases:
+#          - nexus
+
+
+#  config:
+#    image: hyness/spring-cloud-config-server
+#    depends_on:
+#      - gitlab
+#    container_name: config
+#    restart: unless-stopped
+#    ports:
+#      - '8888:8888'
+#    environment:
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_URI: 'http://gitlab/lab/configs.git'
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL: 'master'
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_SEARCHPATHS: 'cfg/{application}/{profile}'
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME: '####'
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD: '####'
+#      SPRING_CLOUD_CONFIG_SERVER_GIT_CLONE_ON_STARTUP: 'true'
+#    networks:
+#      gitlab_net:
+#        aliases:
+#          - config
+
+
+networks:
+  gitlab_net:
+

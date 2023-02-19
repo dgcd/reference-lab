@@ -1,0 +1,3 @@
+rootProject.name = 'reference'
+include 'app'
+include 'config'

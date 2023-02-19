@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Values.shortName }}-config-client
+  namespace: {{ .Values.global.namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- toYaml .Values.selectorLabels | nindent 6 }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              config-service: client
+        - namespaceSelector:
+            matchLabels:
+              config-service: client
+      ports:
+        - protocol: TCP
+          port: 8080

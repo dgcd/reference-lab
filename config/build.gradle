@@ -1,0 +1,26 @@
+dependencies {
+    // web
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
+        exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-el'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation('org.springframework.cloud:spring-cloud-config-server') {
+        exclude group: 'org.springframework.security', module: 'spring-security-rsa'
+    }
+}
+
+tasks.named('bootJar') {
+    archiveFileName = 'reference-config.jar'
+    exclude('application.properties')
+}
+
+tasks.named('jar') {
+    enabled = false
+}
+
+springBoot {
+    buildInfo()
+}
