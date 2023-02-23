@@ -7,14 +7,13 @@ curl http://##:##@localhost:8080/reference-app/dev
 # build
 ./gradlew :config:build
 
-docker build -t dgcd/reference-snapshot:config-4 -f ./config/deploy/Dockerfile ./config && \
-docker push dgcd/reference-snapshot:config-4
+docker build -t dgcd/reference-snapshot:config -f ./config/deploy/Dockerfile ./config && \
+docker push     dgcd/reference-snapshot:config
 
 helm upgrade \
   --debug \
   --install reference-config config/deploy/helm-chart/ \
-  --set image.digest=32f3610d83c87fc3077ff798d6929a2ee91c6336f8e4a09dbd12f37220259eb2 \
+  --set image.digest=fa73728f4962a460f3a646923399c39c5da49c8bda2dd88e242edc1887f95efb \
   --set global.namespace=reference-config \
   --namespace reference-config
 ```
-
