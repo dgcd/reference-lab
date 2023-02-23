@@ -7,7 +7,7 @@
 - gitlab credentials
     - username: root
     - password: `docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password`
-    - for clone: `git clone ssh://git@gitlab.example.com:2222/lab/reference`
+    - for clone: `git clone ssh://git@gitlab.example.com:2222/lab/reference-lab`
 - add [static DNS to kubernetes for gitlab](https://stackoverflow.com/questions/37166822/is-there-a-way-to-add-arbitrary-records-to-kube-dns)
 
 ```yaml
@@ -87,4 +87,3 @@ kubectl get serviceaccount default -n reference-dev --output=yaml
 - MinIO
 
 https://www.howtogeek.com/devops/how-to-configure-minio-as-a-shared-cache-for-gitlab-ci/
-

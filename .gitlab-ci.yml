@@ -14,16 +14,16 @@ version:
       case "$CI_COMMIT_BRANCH" in
         release/*)
           BUILD_VERSION="$APP_VERSION.$CI_PIPELINE_ID"
-          IMAGE_NAME="$DOCKER_REPO_USER/$CI_PROJECT_NAME-snapshot"
+          IMAGE_NAME="$DOCKER_REPO_USER/reference-snapshot"
           K8S_PROFILE="test"
         ;;
         *)
           BUILD_VERSION="$APP_VERSION.$CI_PIPELINE_ID-SNAPSHOT"
-          IMAGE_NAME="$DOCKER_REPO_USER/$CI_PROJECT_NAME-snapshot"
+          IMAGE_NAME="$DOCKER_REPO_USER/reference-snapshot"
           K8S_PROFILE="dev"
         ;;
       esac
-      K8S_NAMESPACE="$CI_PROJECT_NAME-$K8S_PROFILE"
+      K8S_NAMESPACE="reference-$K8S_PROFILE"
     - echo "BUILD_VERSION=${BUILD_VERSION}" >> version.env
     - echo "IMAGE_NAME=${IMAGE_NAME}" >> version.env
     - echo "K8S_PROFILE=${K8S_PROFILE}" >> version.env
@@ -107,7 +107,7 @@ deploy:
   script:
     - helm upgrade
       --debug
-      --install $CI_PROJECT_NAME app/deploy/helm-chart/
+      --install reference-app app/deploy/helm-chart/
       --set image.name=$IMAGE_NAME
       --set image.digest=$IMAGE_DIGEST
       --set global.env=$K8S_PROFILE
@@ -134,7 +134,7 @@ deploy-prod:
     - export KUBECONFIG=$K8S_AUTH_FILE
   script:
     - helm upgrade
-      --install $CI_PROJECT_NAME app/deploy/helm-chart/
+      --install reference-app app/deploy/helm-chart/
       --set image.name=$IMAGE_NAME
       --set image.digest=$IMAGE_DIGEST
       --set global.env=prod

@@ -1,5 +1,5 @@
 apiVersion: v2
-name: reference
+name: reference-app
 description: Spring Boot Reference Project Chart
 type: application
 version: 0.0.1
