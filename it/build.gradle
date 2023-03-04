@@ -2,6 +2,14 @@ plugins {
     id 'org.springframework.boot'
 }
 
+//repositories {
+//    mavenLocal()
+//}
+//
+//tasks.withType(JavaCompile).each {
+//    it.dependsOn ':api:publishToMavenLocal'
+//}
+
 configurations {
     compileOnly.extendsFrom annotationProcessor
     testCompileOnly.extendsFrom annotationProcessor
@@ -14,6 +22,10 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
+    // api
+    implementation project(':it-api')
+//    implementation 'dgcd.studies.spring.integrationtests:api:0.0.1-SNAPSHOT'
+
     // web
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
@@ -21,31 +33,21 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    // config
-    implementation('org.springframework.cloud:spring-cloud-starter-config') {
-        exclude group: 'org.springframework.security', module: 'spring-security-rsa'
-    }
+    // grpc
+    implementation "net.devh:grpc-server-spring-boot-starter:$grpcStarterVersion"
+
+    // kafka
+    implementation 'org.springframework.kafka:spring-kafka'
 
     // database
-//    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-//    implementation 'org.flywaydb:flyway-core'
-//    runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
+
 
     // testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
     testImplementation "io.zonky.test:embedded-database-spring-test:$zonkySpringVersion"
     testImplementation "io.zonky.test:embedded-postgres:$zonkyPostgresVersion"
-}
-
-tasks.named('bootJar') {
-    archiveFileName = 'reference-app.jar'
-    exclude('application.properties')
-}
-
-tasks.named('jar') {
-    enabled = false
-}
-
-springBoot {
-    buildInfo()
 }

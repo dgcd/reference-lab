@@ -188,6 +188,9 @@ configmap:
   app-refresh.initial-delay: "7000"
   app-refresh.fixed-delay: "7000"
 
+  app.cm-change-property1: "For change in config map #1"
+  app.cm-change-property2: "For change in config map #2"
+
   app.static-property:
     dev: "Static value for dev"
     test: "Static value for test"

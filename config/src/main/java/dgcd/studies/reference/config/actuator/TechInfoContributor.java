@@ -39,7 +39,9 @@ public class TechInfoContributor implements InfoContributor {
     ) {
         this.appName = appName;
         this.appVersion = buildProperties.getVersion();
-        this.appBuildtime = LocalDateTime.ofInstant(buildProperties.getTime(), ZoneId.systemDefault()).format(FORMATTER);
+        this.appBuildtime = LocalDateTime
+                .ofInstant(buildProperties.getTime(), ZoneId.systemDefault())
+                .format(FORMATTER);
         this.springProfiles = Arrays.toString(env.getActiveProfiles());
         this.springBootVersion = SpringBootVersion.getVersion();
         try {

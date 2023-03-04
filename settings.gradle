@@ -2,3 +2,6 @@ rootProject.name = 'reference-lab'
 
 include 'app'
 include 'config'
+
+include 'it-api'
+include 'it'

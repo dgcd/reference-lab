@@ -40,6 +40,8 @@ public class PropertiesContributor implements InfoContributor {
         props.put("refreshProperty2", env.getProperty("refresh.property2"));
         props.put("refreshProperty3", refreshProperties.getProperty3());
         props.put("refreshProperty4", refreshProperties.getProperty4());
+        props.put("cm-change 1", env.getProperty("app.cm-change-property1"));
+        props.put("cm-change 2", env.getProperty("app.cm-change-property2"));
 
         builder.withDetail("propertiesInfo", props);
     }
