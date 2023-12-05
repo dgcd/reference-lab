@@ -1,7 +1,6 @@
 package dgcd.studies.reference.app.actuator;
 
 import dgcd.studies.reference.app.catfact.CatfactService;
-import dgcd.studies.reference.app.catfact.FactDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.info.Info;
 import org.springframework.boot.actuate.info.InfoContributor;
@@ -20,7 +19,7 @@ public class CatfactContributor implements InfoContributor {
 
     @Override
     public void contribute(Info.Builder builder) {
-        FactDto factDto = catfactService.getFact();
+        var factDto = catfactService.getFact();
         if (nonNull(factDto)) {
             var props = new LinkedHashMap<>();
             props.put("fact", factDto.fact());

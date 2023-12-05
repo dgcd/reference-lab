@@ -1,4 +1,4 @@
-FROM eclipse-temurin:19-jdk-jammy as jre-build
+FROM eclipse-temurin:21-jdk-jammy as jre-build
 
 RUN java --list-modules && \
     $JAVA_HOME/bin/jlink \
@@ -10,7 +10,7 @@ RUN java --list-modules && \
          --output /javaruntime
 
 
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 ENV JAVA_HOME=/opt/java/openjdk
 ENV PATH "${JAVA_HOME}/bin:${PATH}"

@@ -18,7 +18,7 @@
 //        var version = jdbcTemplate.queryForObject("select version();", String.class);
 //
 //        assertThat(version).isNotNull();
-//        assertThat(version).contains("PostgreSQL 15.2");
+//        assertThat(version).contains("PostgreSQL 16.1");
 //    }
 //
 //}
