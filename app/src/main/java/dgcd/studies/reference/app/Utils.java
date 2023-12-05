@@ -6,9 +6,9 @@ public class Utils {
 
     public static void logWithPrefix(Logger log, String prefix) {
         if (log.isDebugEnabled()) {
-            log.debug("" + prefix + " - debug");
+            log.debug(prefix + " - debug");
         } else {
-            log.info("" + prefix + " - info");
+            log.info(prefix + " - info");
         }
     }
 
