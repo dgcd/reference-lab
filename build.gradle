@@ -58,3 +58,11 @@ subprojects {
         toolVersion = "$jacocoVersion"
     }
 }
+
+tasks.register('buildAll') {
+    group = 'build'
+    dependsOn ':app:build'
+    dependsOn ':config:build'
+    dependsOn ':it:build'
+    dependsOn ':loaded:build'
+}
