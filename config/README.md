@@ -13,7 +13,7 @@ docker push     dgcd/reference-snapshot:config
 helm upgrade \
   --debug \
   --install reference-config config/deploy/helm-chart/ \
-  --set image.digest=51abd79ff4f36ecfdd375d5e6812e112cf4ba9d4b10b7810a7b12f0ea1cba5f3 \
+  --set image.digest=3642d458f5b71c7efdd7ff633eb2c47eec303071c24b4ecbdcdba5216609029e \
   --set global.namespace=reference-config \
   --namespace reference-config
 ```

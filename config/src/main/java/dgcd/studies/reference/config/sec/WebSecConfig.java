@@ -12,8 +12,7 @@ public class WebSecConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf().disable()
+        return http.csrf().disable()
                 .httpBasic().and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator**", "/actuator/**").permitAll()
