@@ -9,7 +9,7 @@ data:
   application.properties: |+
     {{- $env := .Values.global.env }}
     GLOBAL_ENVIRONMENT={{ $env }}
-  
+
     {{- range $k, $v := .Values.configmap }}
     {{- if eq (kindOf $v) "map" }}
     {{ $k }}={{ pluck $env $v | first }}

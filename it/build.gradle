@@ -10,21 +10,10 @@ plugins {
 //    it.dependsOn ':api:publishToMavenLocal'
 //}
 
-configurations {
-    compileOnly.extendsFrom annotationProcessor
-    testCompileOnly.extendsFrom annotationProcessor
-}
-
 dependencies {
-    // lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
-
     // api
     implementation project(':it-api')
-//    implementation 'dgcd.studies.spring.integrationtests:api:0.0.1-SNAPSHOT'
+//    implementation 'dgcd.studies.reference.it:api:0.0.1-SNAPSHOT'
 
     // web
     implementation('org.springframework.boot:spring-boot-starter-web') {

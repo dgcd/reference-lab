@@ -2,17 +2,8 @@ plugins {
     id 'org.springframework.boot'
 }
 
-configurations {
-    compileOnly.extendsFrom annotationProcessor
-    testCompileOnly.extendsFrom annotationProcessor
-}
-
 dependencies {
-    // lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testCompileOnly 'org.projectlombok:lombok'
-    testAnnotationProcessor 'org.projectlombok:lombok'
+    implementation project(':reference-spring-boot-starter')
 
     // web
     implementation('org.springframework.boot:spring-boot-starter-web') {

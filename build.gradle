@@ -1,7 +1,8 @@
 plugins {
-    id 'java'
     id 'org.springframework.boot' version "$springBootVersion"
     id 'io.spring.dependency-management' version "$springDependencyManagement"
+    id 'java'
+    id 'jacoco'
 }
 
 repositories {
@@ -10,10 +11,8 @@ repositories {
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'idea'
-//    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
     apply plugin: 'jacoco'
+    apply plugin: 'io.spring.dependency-management'
 
     compileJava.options.encoding = 'UTF-8'
     compileTestJava.options.encoding = 'UTF-8'
@@ -26,10 +25,23 @@ subprojects {
         mavenCentral()
     }
 
+    configurations {
+        compileOnly.extendsFrom annotationProcessor
+        testCompileOnly.extendsFrom annotationProcessor
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+    }
+
     dependencyManagement {
         imports {
-            mavenBom "io.zonky.test.postgres:embedded-postgres-binaries-bom:$zonkyPostgresBomVersion"
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+            mavenBom "io.zonky.test.postgres:embedded-postgres-binaries-bom:$zonkyPostgresBomVersion"
             mavenBom "io.grpc:grpc-bom:$grpcVersion"
         }
     }
