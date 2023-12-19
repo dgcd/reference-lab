@@ -6,6 +6,9 @@ include 'config'
 include 'it-api'
 include 'it'
 
+include 'loaded-app'
+include 'loaded-gatling'
+
 include 'reference-techinfo'
 include 'reference-spring-boot-autoconfigure'
 include 'reference-spring-boot-starter'

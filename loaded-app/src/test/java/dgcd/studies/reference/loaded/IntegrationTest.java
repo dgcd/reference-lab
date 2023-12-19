@@ -1,4 +1,4 @@
-package dgcd.studies.reference.app;
+package dgcd.studies.reference.loaded;
 
 import io.zonky.test.db.AutoConfigureEmbeddedDatabase;
 import org.junit.jupiter.api.Tag;

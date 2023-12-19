@@ -3,8 +3,6 @@ plugins {
 }
 
 dependencies {
-    implementation project(':reference-spring-boot-starter')
-
     // web
     implementation('org.springframework.boot:spring-boot-starter-web') {
         exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
@@ -12,14 +10,19 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-    // config
-    implementation('org.springframework.cloud:spring-cloud-starter-config') {
-        exclude group: 'org.springframework.security', module: 'spring-security-rsa'
-    }
+    // database
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation "io.zonky.test:embedded-database-spring-test:$zonkySpringVersion"
+    testImplementation "io.zonky.test:embedded-postgres:$zonkyPostgresVersion"
 }
 
 tasks.named('bootJar') {
-    archiveFileName = 'reference-app.jar'
+    archiveFileName = 'reference-loaded-app.jar'
     exclude('application.properties')
 }
 
