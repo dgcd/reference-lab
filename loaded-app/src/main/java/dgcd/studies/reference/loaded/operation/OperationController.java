@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(
         value = "/api/operation",
-        consumes = APPLICATION_JSON_VALUE,
+//        consumes = APPLICATION_JSON_VALUE,
         produces = APPLICATION_JSON_VALUE
 )
 @RequiredArgsConstructor
@@ -23,6 +23,9 @@ public class OperationController {
     private final OperationService operationService;
 
     @PostMapping
+    @RequestMapping(
+            consumes = APPLICATION_JSON_VALUE
+    )
     public Operation create(@RequestBody OperationCreateRequest operationCreateRequest) {
         log.info("create operation request: {}", operationCreateRequest);
         return operationService.create(operationCreateRequest);

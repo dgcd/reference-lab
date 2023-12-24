@@ -37,7 +37,7 @@ public class OperationService {
         var operation = new Operation(id, description, amount);
 
         log.info("get started:  {}", operation);
-//        Thread.sleep(50 +(long) (100 * Math.random()) );
+        Thread.sleep(50 +(long) (100 * Math.random()) );
         log.info("get finished: {}", operation);
         return operation;
     }
