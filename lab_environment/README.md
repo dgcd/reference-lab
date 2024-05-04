@@ -1,13 +1,29 @@
+```shell
+mkdir -p reference_lab/postgres && \
+mkdir -p reference_lab/gitlab/config && \
+mkdir -p reference_lab/gitlab/data && \
+mkdir -p reference_lab/gitlab/logs && \
+mkdir -p reference_lab/minio
+```
+
+- add to local hosts `gitlab.example.com`
 - install docker and docker-compose to server #1 [192.168.88.41] (manually)
 - install microk8s to server #2 [192.168.88.42] (from list)
 - apply docker-compose.yaml for [gitlab](https://docs.gitlab.com/ee/install/docker.html) and nexus
 - nexus credentials
     - username: admin
     - password: `docker exec -it nexus cat /nexus-data/admin.password && echo`
-- gitlab credentials
+- gitlab configuration
     - username: root
     - password: `docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password`
-    - for clone: `git clone ssh://git@gitlab.example.com:2222/lab/reference-lab`
+    - change password, add ssh key
+    - create 'lab' group and add ci/cd variables:
+        - DOCKER_REPO_USER
+        - DOCKER_REPO_PASS
+        - DOCKER_REPO_HOST - https://index.docker.io/v1/
+        - K8S_AUTH_FILE
+    - for clone: `ssh://git@gitlab.example.com:2222/lab/reference-lab`
+
 - add [static DNS to kubernetes for gitlab](https://stackoverflow.com/questions/37166822/is-there-a-way-to-add-arbitrary-records-to-kube-dns)
 
 ```yaml
@@ -53,8 +69,8 @@ data:
 helm install \
     --namespace gitlab-runner-ns \
     --create-namespace \
-    --set gitlabUrl=http://gitlab.example.com,runnerRegistrationToken=token \
-    gitlab-runner-lab2-2 \
+    --set gitlabUrl=http://gitlab.example.com,runnerToken=token \
+    gitlab-runner-lab1-1 \
     gitlab/gitlab-runner
 ```
 
@@ -75,7 +91,7 @@ kubectl create secret docker-registry regcred \
 
 kubectl get secret regcred -n reference-dev --output=yaml
 
-kubectl get secret regcred -n reference-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
+kubectl get secret regcred -n reference-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 -d
 
 kubectl patch serviceaccount default \
   -p '{"imagePullSecrets": [{"name": "regcred"}]}' \
