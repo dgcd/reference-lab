@@ -3,9 +3,12 @@ rootProject.name = 'reference-lab'
 include 'app'
 include 'config'
 
-include 'it-api'
-include 'it'
+include 'inttest:it-api'
+include 'inttest:it'
 
-include 'reference-techinfo'
-include 'reference-spring-boot-autoconfigure'
-include 'reference-spring-boot-starter'
+include 'loadtest:loaded-app'
+include 'loadtest:loaded-gatling'
+
+include 'starter:reference-techinfo'
+include 'starter:reference-spring-boot-autoconfigure'
+include 'starter:reference-spring-boot-starter'

@@ -1,8 +1,0 @@
-plugins {
-    id 'java-library'
-}
-
-dependencies {
-    api project(':reference-techinfo')
-    api project(':reference-spring-boot-autoconfigure')
-}
