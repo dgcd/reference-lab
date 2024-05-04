@@ -6,6 +6,10 @@ include 'config'
 include 'inttest:it-api'
 include 'inttest:it'
 
+include 'istiolab:api'
+include 'istiolab:backend'
+include 'istiolab:gateway'
+
 include 'loadtest:loaded-app'
 include 'loadtest:loaded-gatling'
 

@@ -65,5 +65,7 @@ tasks.register('buildAll') {
     dependsOn ':app:build'
     dependsOn ':config:build'
     dependsOn ':inttest:it:build'
-    dependsOn ':loadtest:loaded:build'
+    dependsOn ':istiolab:backend:build'
+    dependsOn ':istiolab:gateway:build'
+    dependsOn ':loadtest:loaded-app:build'
 }
