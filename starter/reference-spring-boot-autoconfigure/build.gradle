@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    api project(':reference-techinfo')
+    api project(':starter:reference-techinfo')
 
     api 'org.springframework.boot:spring-boot-starter'
     api 'org.springframework.boot:spring-boot-actuator'

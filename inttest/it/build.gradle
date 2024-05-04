@@ -12,7 +12,7 @@ plugins {
 
 dependencies {
     // api
-    implementation project(':it-api')
+    implementation project(':inttest:it-api')
 //    implementation 'dgcd.studies.reference.it:api:0.0.1-SNAPSHOT'
 
     // web
