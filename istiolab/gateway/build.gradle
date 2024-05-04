@@ -1,0 +1,17 @@
+plugins {
+    id 'org.springframework.boot'
+}
+
+dependencies {
+    implementation project(':istiolab:api')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+}
+
+bootJar {
+    archiveFileName = 'kubelab-gateway.jar'
+    exclude('*.properties')
+}
