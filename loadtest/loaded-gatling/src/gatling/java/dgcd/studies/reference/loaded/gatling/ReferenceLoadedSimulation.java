@@ -1,9 +1,5 @@
 package dgcd.studies.reference.loaded.gatling;
 
-import io.gatling.core.body.InputStreamBody;
-import io.gatling.core.body.RawFileBodies;
-import io.gatling.core.body.RawFileBody;
-import io.gatling.core.body.StringBody;
 import io.gatling.javaapi.core.ChainBuilder;
 import io.gatling.javaapi.core.CoreDsl;
 import io.gatling.javaapi.core.ScenarioBuilder;
@@ -33,7 +29,7 @@ public class ReferenceLoadedSimulation extends Simulation {
     private final ChainBuilder postChain = CoreDsl
             .exec(http("Create")
                     .post("/operation")
-                    .body(StringBody.)
+//                    .body(StringBody.)
                     .check(status().is(200)))
 //            .pause(1)
             ;

@@ -1,5 +1,11 @@
 # Config server
 
+### env
+
+- `GIT_USERNAME=dummy;GIT_PASSWORD=dummy;CONFIG_USERNAME=dummy;CONFIG_PASSWORD=dummy`
+
+### deploy
+
 ```shell
 # local check
 curl http://##:##@localhost:8080/reference-app/dev
