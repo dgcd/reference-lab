@@ -8,8 +8,7 @@
 - Add environment variables to Gradle and JUnit run configuration template in IDE:
 
 ```
-GIT_PASSWORD=dummy;CONFIG_USERNAME=dummy;GIT_USERNAME=dummy;CONFIG_PASSWORD=dummy
-
+GIT_PASSWORD=dummy;CONFIG_USERNAME=dummy;GIT_USERNAME=dummy;CONFIG_PASSWORD=dummy;
 POSTGRES_STUDIES_USERNAME=##;POSTGRES_STUDIES_PASSWORD=####;POSTGRES_STUDIES_PORT=######
 ```
 
@@ -18,4 +17,3 @@ POSTGRES_STUDIES_USERNAME=##;POSTGRES_STUDIES_PASSWORD=####;POSTGRES_STUDIES_POR
 ```sql
 create database reference_int_tests;
 ```
-ORD=dummy;POSTG
