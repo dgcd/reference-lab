@@ -1,4 +1,4 @@
-create table main.operation (
+create table operation (
     id              bigserial               not null,
     description     varchar(100)            not null,
     balance         numeric(15, 2)          not null    default 0,

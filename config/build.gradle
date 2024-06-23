@@ -12,6 +12,7 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
 
     implementation('org.springframework.cloud:spring-cloud-config-server') {
         exclude group: 'org.springframework.security', module: 'spring-security-rsa'
