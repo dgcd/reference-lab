@@ -25,23 +25,19 @@
 - создать namespace и креды для docker registry
 
 ```shell script
-kubectl create namespace kubelab-dev
-kubectl label namespace kubelab-dev istio-injection=enabled
-
+kubectl create namespace kubelab-dev && \
+kubectl label namespace kubelab-dev istio-injection=enabled && \
 kubectl create secret docker-registry regcred \
   --docker-server=https://index.docker.io/v2/ \
   --docker-username=#### \
   --docker-password=######### \
-  -n kubelab-dev
-
-kubectl get secret regcred -n kubelab-dev --output=yaml
-
-kubectl get secret regcred -n kubelab-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
-
+  -n kubelab-dev && \
 kubectl patch serviceaccount default \
   -p '{"imagePullSecrets": [{"name": "regcred"}]}' \
   -n kubelab-dev
 
+kubectl get secret regcred -n kubelab-dev --output=yaml && \
+kubectl get secret regcred -n kubelab-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode && \
 kubectl get serviceaccount default -n kubelab-dev --output=yaml
 ```
 

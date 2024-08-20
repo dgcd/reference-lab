@@ -3,7 +3,7 @@
 ```shell
 kubectl apply -f gateway/deploy/secrets.yaml
 
-./gradlew :gateway:build
+../gradlew :istiolab:gateway:build
 
 docker build -t dgcd/reference-snapshot:gateway -f ./gateway/deploy/Dockerfile ./gateway && \
 docker push     dgcd/reference-snapshot:gateway
@@ -11,7 +11,7 @@ docker push     dgcd/reference-snapshot:gateway
 helm upgrade \
   --debug \
   --install kubelab-gateway gateway/deploy/helm-chart/ \
-  --set image.digest=de73ac68c7e33eeb2e58e6a5b8abf10b17db6a2de98d0494ef30fe9322bb0b15 \
+  --set image.digest=0b6929b65db0cd505edee65b3998ca47eb62f0cacfab48bd80bac80b18017a24 \
   --set global.namespace=kubelab-dev \
   --namespace kubelab-dev
 ```
