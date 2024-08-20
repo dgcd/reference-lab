@@ -172,3 +172,5 @@ echo "192.168.88.42 config.lab.example.com" | sudo tee -a /etc/hosts
 ```
 
 ## Deploy istio lab
+
+- [README.md](../istiolab/README.md)
