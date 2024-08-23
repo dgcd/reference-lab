@@ -140,4 +140,3 @@ deploy-prod:
       --set global.env=prod
       --set global.namespace=reference-prod
       --namespace reference-prod
-
