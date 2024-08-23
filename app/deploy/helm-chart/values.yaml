@@ -142,9 +142,9 @@ configmap:
   spring.mvc.servlet.load-on-startup: "1"
 
   spring.datasource.url:
-    dev: "jdbc:postgresql://192.168.88.41:5432/reference_dev"
-    test: "jdbc:postgresql://192.168.88.41:5432/reference_test"
-    prod: "jdbc:postgresql://192.168.88.41:5432/reference_prod"
+    dev: "jdbc:postgresql://postgres.example.com:5432/reference_dev"
+    test: "jdbc:postgresql://postgres.example.com:5432/reference_test"
+    prod: "jdbc:postgresql://postgres.example.com:5432/reference_prod"
   spring.datasource.username: "${DB_USERNAME}"
   spring.datasource.password: "${DB_PASSWORD}"
   spring.datasource.hikari.maximum-pool-size: "2"
@@ -222,14 +222,3 @@ networkPolicy:
       - 192.168.88.41/32
     prod:
       - 192.168.88.41/32
-
-  configServerPort: 8888
-  configServerProto: TCP
-  configServer:
-    dev:
-      - 192.168.88.41/32
-    test:
-      - 192.168.88.41/32
-    prod:
-      - 192.168.88.41/32
-

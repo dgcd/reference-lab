@@ -3,13 +3,13 @@
 ```shell
 # build front
 
-docker build -t dgcd/reference-snapshot:frontend -f ./frontend/deploy/Dockerfile ./frontend && \
+docker build -t dgcd/reference-snapshot:frontend -f ./istiolab/frontend/deploy/Dockerfile ./istiolab/frontend && \
 docker push     dgcd/reference-snapshot:frontend
 
 helm upgrade \
   --debug \
-  --install kubelab-frontend frontend/deploy/helm-chart/ \
-  --set image.digest=a0a634043f93c89fe0dfa49a808a8bf1965328b797a1357648d94f95b6c5d9aa \
+  --install kubelab-frontend istiolab/frontend/deploy/helm-chart/ \
+  --set image.digest=3ada58df0a09d7ef24325cdaec22c6861aea173e31129609fbfa497620e8f046 \
   --set global.namespace=kubelab-dev \
   --namespace kubelab-dev
 ```

@@ -1,0 +1,18 @@
+gitlabUrl: http://gitlab.example.com
+rbac: { create: true }
+runnerToken: glrt-uvBzC7_8h8rxKye9WEj3
+
+runners:
+  config: |
+    [[runners]]
+      [runners.kubernetes]
+        image = "ubuntu:22.04"
+      [runners.cache]
+        Type = "s3"
+        Shared = true
+      [runners.cache.s3]
+        AccessKey = "gitlabuser"
+        SecretKey = "gitlabpassword"
+        BucketName = "gitlab"
+        Insecure = true
+        ServerAddress = "minio.example.com:9000"

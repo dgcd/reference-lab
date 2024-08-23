@@ -22,40 +22,43 @@
 
 ## Запуск проекта:
 
+- выполнить
+
+```shell
+echo "192.168.88.42 kubelab.lab.example.com" | sudo tee -a /etc/hosts
+```
+
 - создать namespace и креды для docker registry
 
 ```shell script
-kubectl create namespace kubelab-dev
-kubectl label namespace kubelab-dev istio-injection=enabled
-
+kubectl create namespace kubelab-dev && \
+kubectl label  namespace kubelab-dev istio-injection=enabled && \
 kubectl create secret docker-registry regcred \
   --docker-server=https://index.docker.io/v2/ \
   --docker-username=#### \
   --docker-password=######### \
-  -n kubelab-dev
-
-kubectl get secret regcred -n kubelab-dev --output=yaml
-
-kubectl get secret regcred -n kubelab-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode
-
+  -n kubelab-dev && \
 kubectl patch serviceaccount default \
   -p '{"imagePullSecrets": [{"name": "regcred"}]}' \
   -n kubelab-dev
 
+kubectl get secret regcred -n kubelab-dev --output=yaml && \
+kubectl get secret regcred -n kubelab-dev --output="jsonpath={.data.\.dockerconfigjson}" | base64 --decode && \
 kubectl get serviceaccount default -n kubelab-dev --output=yaml
 ```
 
 - установить чарты
+    - istio, port:
+      `kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}'`
+    - nodesrv - http://kubelab.lab.example.com/node
     - backend
     - gateway + secret
-    - nodesrv
     - frontend
-    - istio
 
 - запустить трафик
 
 ```shell
-while true; do ./requester_istio.sh; sleep 5; done
+while true; do ./istiolab/requester_istio.sh; sleep 5; done
 # или
-while true; do ./requester_ingress.sh; sleep 5; done
+while true; do ./istiolab/requester_ingress.sh; sleep 5; done
 ```

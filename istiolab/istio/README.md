@@ -9,7 +9,7 @@
 ```shell
 helm upgrade \
   --debug \
-  --install kubelab-istio istio/helm-chart/ \
+  --install kubelab-istio istiolab/istio/helm-chart/ \
   --set global.namespace=kubelab-dev \
   --namespace kubelab-dev
 ```

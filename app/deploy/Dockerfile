@@ -1,4 +1,4 @@
-FROM dgcd/reference-snapshot:java-runtime-21
+FROM dgcd/reference-snapshot:java-runtime-22
 
 WORKDIR /home/starter
 

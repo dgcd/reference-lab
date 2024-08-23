@@ -4,6 +4,6 @@ plugins {
 }
 
 gatling {
-  logLevel = 'WARN'
-  logHttp = 'NONE'
+//  logLevel = 'WARN'
+//  logHttp = 'NONE'
 }

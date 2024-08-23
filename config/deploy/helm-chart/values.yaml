@@ -45,6 +45,12 @@ envFrom:
 env:
   - name: TZ
     value: Europe/Moscow
+#  - name: XDG_CONFIG_HOME
+#    value: /home/starter
+#  - name: XDG_DATA_HOME
+#    value: /home/starter
+#  - name: HOME
+#    value: /home/starter
 
 resources:
   requests:
@@ -107,7 +113,8 @@ configmap:
   spring.mvc.servlet.load-on-startup: "1"
 
   spring.cloud.compatibility-verifier.enabled: "false"
-  spring.cloud.config.server.git.uri: "http://gitlab.example.com/lab/configs.git"
+
+  spring.cloud.config.server.git.uri: "http://gitlab.example.com/lab/reference-config-repo.git"
   spring.cloud.config.server.git.defaultLabel: "master"
   spring.cloud.config.server.git.search-paths: "cfg/{application}/{profile}"
   spring.cloud.config.server.git.username: "${GIT_USERNAME}"
@@ -125,10 +132,14 @@ configmap:
   management.health.diskspace.enabled: "true"
   management.health.kubernetes.enabled: "true"
   management.info.os.enabled: "true"
+  spring.cloud.discovery.client.composite-indicator.enabled: "false"
 
   management.metrics.export.prometheus.enabled: "true"
   management.metrics.distribution.percentiles-histogram.http.server.requests: "true"
   management.metrics.distribution.sla.http.server.requests: "1ms,5ms"
+
+#  logging.level.org.springframework.cloud.config.server: "TRACE"
+#  logging.level.org.eclipse.jgit: "DEBUG"
 
 
 ##################

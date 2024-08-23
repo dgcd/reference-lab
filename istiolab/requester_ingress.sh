@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CLUSTER_HOST=192.168.88.42 && \
+export CLUSTER_HOST=kubelab.lab.example.com && \
 export CLUSTER_PORT=80 && \
 printf "address: $CLUSTER_HOST:$CLUSTER_PORT\n"
 

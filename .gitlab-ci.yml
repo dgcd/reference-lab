@@ -41,7 +41,7 @@ build-back:
   needs:
     - job: version
       artifacts: true
-  image: gradle:jdk21-alpine
+  image: eclipse-temurin:22
   variables:
     GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   before_script:
@@ -140,4 +140,3 @@ deploy-prod:
       --set global.env=prod
       --set global.namespace=reference-prod
       --namespace reference-prod
-
