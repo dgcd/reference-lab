@@ -1,4 +1,4 @@
-FROM eclipse-temurin:22-jdk-jammy as jre-build
+FROM eclipse-temurin:23-jdk as jre-build
 
 RUN java --list-modules && \
     $JAVA_HOME/bin/jlink \
