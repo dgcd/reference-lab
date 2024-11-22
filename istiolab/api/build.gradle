@@ -2,7 +2,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations'
 }
 
-jar {
+tasks.named('jar') {
     enabled = true
     archiveFileName = 'kubelab-api.jar'
 }

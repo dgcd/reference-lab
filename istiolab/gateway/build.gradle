@@ -11,7 +11,7 @@ dependencies {
     runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 }
 
-bootJar {
+tasks.named('bootJar') {
     archiveFileName = 'kubelab-gateway.jar'
     exclude('*.properties')
 }

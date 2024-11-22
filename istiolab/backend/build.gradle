@@ -9,7 +9,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
-bootJar {
+tasks.named('bootJar') {
     archiveFileName = "kubelab-backend.jar"
     exclude('*.properties')
 }
