@@ -1,6 +1,6 @@
 # Reference project
 
-- back: JDK 22, Spring Boot, Spring Cloud Config Server
+- back: JDK 23, Spring Boot, Spring Cloud Config Server
 - devops: GitLab CI, Kubernetes, Helm
 
 ## Prerequisites
