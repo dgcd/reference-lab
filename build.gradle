@@ -20,7 +20,7 @@ subprojects {
     compileTestJava.options.encoding = 'UTF-8'
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(23)
+            languageVersion = JavaLanguageVersion.of(24)
         }
     }
 

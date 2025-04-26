@@ -41,7 +41,7 @@ build-back:
   needs:
     - job: version
       artifacts: true
-  image: eclipse-temurin:23
+  image: eclipse-temurin:24
   variables:
     GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   before_script:
