@@ -11,7 +11,7 @@ include 'istiolab:backend'
 include 'istiolab:gateway'
 
 include 'loadtest:loaded-app'
-include 'loadtest:loaded-gatling'
+//include 'loadtest:loaded-gatling'
 
 include 'starter:reference-techinfo'
 include 'starter:reference-spring-boot-autoconfigure'

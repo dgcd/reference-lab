@@ -1,4 +1,4 @@
-FROM dgcd/reference-snapshot:java-runtime-23
+FROM dgcd/reference-snapshot:java-runtime-24
 
 WORKDIR /kubelab/backend
 

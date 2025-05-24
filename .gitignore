@@ -1,25 +1,31 @@
-### Gradle ###
-.gradle
-build
-
-### Maven ###
-target
-
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### VS Code ###
-.vscode
+### Gradle ###
+.gradle/
+build/
+
+### Maven ###
+target/
 
 ### Java ###
 *.hprof
 *.hprof.*
+.kotlin/
+
+### VS Code ###
+.vscode/
+
+### Front ###
+node_modules/
+out/
+dist/
 
 ### misc ###
-logs
+logs/
 *.log
 *.db
 *.bak
@@ -27,8 +33,3 @@ logs
 ### OS ###
 .DS_Store
 Thumbs.db
-
-### Front dependencies ###
-node_modules
-out
-dist
